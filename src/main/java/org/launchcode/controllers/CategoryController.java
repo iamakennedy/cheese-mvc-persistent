@@ -14,12 +14,10 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @RequestMapping("")
-    public class index(Model model; String Categories){
-
-        model.addAttribute("categoryList", categoryDao.findAll());
-        model.addAttribute("title", Categories);
-
+    @RequestMapping(value="")
+    public String index(Model model) {
+        model.addAttribute("title", "My Categories");
+        model.addAttribute("categories", categoryDao.findAll());
         return "category/index";
     }
 
