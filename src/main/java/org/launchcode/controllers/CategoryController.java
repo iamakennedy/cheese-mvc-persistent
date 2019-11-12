@@ -15,7 +15,6 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("category")
 public class CategoryController {
-
     @Autowired
     private CategoryDao categoryDao;
 
@@ -40,9 +39,7 @@ public class CategoryController {
         }
         else {
             categoryDao.save(category);
-//            return "redirect:/category";
-            return "redirect:";
+            return "redirect:/category";
         }
     }
-
 }

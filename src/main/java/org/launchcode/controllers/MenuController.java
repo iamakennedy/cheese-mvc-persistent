@@ -1,16 +1,15 @@
 package org.launchcode.controllers;
 
+import org.launchcode.models.Cheese;
 import org.launchcode.models.Menu;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
+import org.launchcode.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -68,13 +67,11 @@ public class MenuController {
     }
 
     @RequestMapping(value="add-item", method = RequestMethod.POST)
-    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm addMenuItemForm, Errors errors,@RequestParam int menuId, @RequestParam int cheeseId) {
+    public String addItem(Model model, @ModelAttribute @Valid AddMenuItemForm addMenuItemForm, Errors errors, @RequestParam int menuId, @RequestParam int cheeseId) {
         if (errors.hasErrors()) {
             return "menu/add-item";
         }
 
-        //Menu menu = menuDao.findOne(addMenuItemForm.getMenuId());
-        //Cheese cheese = cheeseDao.findOne(addMenuItemForm.getCheeseId());
         Menu menu = menuDao.findOne(menuId);
         Cheese cheese = cheeseDao.findOne(cheeseId);
         menu.addItem(cheese);
